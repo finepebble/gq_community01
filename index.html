@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Board · 게시판</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>AI Board</h1>
+    <nav>
+      <button id="btnNew" class="btn primary">새 글쓰기</button>
+      <button id="btnTheme" aria-label="Toggle Theme">🌓</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <div class="search">
+        <input id="q" placeholder="제목/내용/작성자 검색…" />
+        <button id="btnSearch" class="btn">검색</button>
+        <button id="btnReset" class="btn subtle">초기화</button>
+      </div>
+      <div class="meta"><span id="count">0</span>개의 글</div>
+    </section>
+
+    <section id="list" class="post-list"></section>
+
+    <section id="pager" class="pager"></section>
+  </main>
+
+  <dialog id="dlgWrite">
+    <form id="formWrite" method="dialog" class="form">
+      <h3>새 글쓰기</h3>
+      <label>작성자명<input name="author" required maxlength="40"></label>
+      <label>수정용 비밀번호<input name="password" type="password" required minlength="4" maxlength="64"></label>
+      <label>제목<input name="title" required maxlength="120"></label>
+      <label>내용<textarea name="content" rows="8" required></textarea></label>
+      <div class="row">
+        <button class="btn primary" value="submit">등록</button>
+        <button class="btn" value="cancel" id="cancelWrite">취소</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="tplPostCard">
+    <article class="card">
+      <a class="title"></a>
+      <p class="preview"></p>
+      <div class="meta">
+        <span class="author"></span>
+        <span class="time"></span>
+        <span class="comments"></span>
+      </div>
+      <div class="actions">
+        <button class="btn tiny edit">수정</button>
+        <button class="btn tiny danger del">삭제</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app-index.js"></script>
+  <script>
+    if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
+  </script>
+</body>
+</html>

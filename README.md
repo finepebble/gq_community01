@@ -1,2 +1,21 @@
-# gq_community01
-grand quest test page
+# AI Board (GitHub Pages 버전)
+
+> **서버 없이 동작**하는 게시판 데모: 글/댓글/대댓글, 비밀번호 기반 수정/삭제, 페이지네이션(10개/페이지), **AI 댓글 버튼(로컬 모의 + 외부 엔드포인트 플러그형)**
+
+## 배포
+1) GitHub 새 저장소 생성 → 이 폴더의 파일 전체 업로드  
+2) Settings → Pages → Branch = `main` / root 설정 → 1분 후 접속
+
+## 한계/확장
+- 본 버전은 **localStorage**에 저장합니다(브라우저/단말 별로 데이터 분리).  
+- 실제 운영 시에는 DB/서버(API)로 교체하고, `js/ai.js`의 `AI_ENDPOINT`에 서버 AI URL을 설정하세요.
+
+## 파일
+- `index.html` : 목록/검색/페이지네이션/새 글쓰기(다이얼로그)
+- `post.html` : 상세 + 댓글 트리(답글/수정/삭제) + AI 댓글 버튼
+- `style.css` : 다크/라이트 세련 UI
+- `js/*` : 스토리지/로직/유틸/AI 어댑터
+- `manifest.json`, `sw.js` : PWA 캐시(선택)
+
+## 보안 노트
+- 비밀번호는 **SHA-256 + 고유 salt**로 해시해 로컬에 저장하지만, 로컬 환경 특성상 보안은 제한적입니다. 운영 환경에서는 **서버 측 Argon2id** 등의 강한 해시를 사용하세요.

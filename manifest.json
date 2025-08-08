@@ -1,0 +1,9 @@
+{
+  "name": "AI Board",
+  "short_name": "AI Board",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c1016",
+  "theme_color": "#0c1016",
+  "icons": []
+}

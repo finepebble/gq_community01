@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Board · 글 보기</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1><a href="./index.html">AI Board</a></h1>
+    <nav>
+      <a class="btn" href="./index.html">목록</a>
+      <button id="btnTheme" aria-label="Toggle Theme">🌓</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <article id="post" class="post-view card">
+      <h2 id="title"></h2>
+      <div class="meta">
+        <span id="author"></span>
+        <span id="time"></span>
+      </div>
+      <div id="content" class="content"></div>
+      <div class="actions">
+        <button id="btnEdit" class="btn">수정</button>
+        <button id="btnDelete" class="btn danger">삭제</button>
+        <button id="btnAiReplyPost" class="btn ghost">AI 댓글 달기</button>
+      </div>
+    </article>
+
+    <section id="comments" class="comments">
+      <h3>댓글</h3>
+      <form id="formComment" class="form">
+        <div class="grid-2">
+          <label>작성자명<input name="author" required maxlength="40"></label>
+          <label>수정용 비밀번호<input name="password" type="password" required minlength="4" maxlength="64"></label>
+        </div>
+        <label>내용<textarea name="content" rows="4" required></textarea></label>
+        <div class="row">
+          <button class="btn primary">댓글 등록</button>
+          <button id="btnAiDraft" type="button" class="btn ghost">AI로 초안 만들기</button>
+        </div>
+      </form>
+      <div id="tree" class="comment-tree"></div>
+    </section>
+  </main>
+
+  <dialog id="dlgPassword">
+    <form method="dialog" class="form">
+      <h3>비밀번호 확인</h3>
+      <input name="password" type="password" required minlength="4" maxlength="64" placeholder="수정/삭제 비밀번호">
+      <div class="row">
+        <button class="btn primary" value="ok">확인</button>
+        <button class="btn" value="cancel">취소</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlgEdit">
+    <form id="formEdit" method="dialog" class="form">
+      <h3>수정</h3>
+      <label>제목<input name="title" maxlength="120"></label>
+      <label>내용<textarea name="content" rows="8" required></textarea></label>
+      <div class="row">
+        <button class="btn primary" value="submit">저장</button>
+        <button class="btn" value="cancel">취소</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="tplComment">
+    <div class="cmt" role="treeitem">
+      <div class="cmt-head">
+        <span class="author"></span>
+        <span class="time"></span>
+        <span class="badge ai" hidden>AI</span>
+      </div>
+      <div class="cmt-body"></div>
+      <div class="cmt-actions">
+        <button class="btn tiny reply">답글</button>
+        <button class="btn tiny edit">수정</button>
+        <button class="btn tiny danger del">삭제</button>
+        <button class="btn tiny ghost ai-reply">AI 댓글</button>
+      </div>
+      <div class="cmt-children" role="group"></div>
+    </div>
+  </template>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/app-post.js"></script>
+</body>
+</html>
